@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাইকেল বাজার 🚲</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #16a34a;
+  --green-dark: #0f6b31;
+  --green-light: #22c55e;
+  --green-bg: #f0fdf4;
+  --amber: #f59e0b;
+  --amber-dark: #d97706;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --gray: #6b7280;
+  --border: #d1fae5;
+  --white: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --shadow: 0 2px 12px rgba(22,163,74,0.10);
+  --shadow-lg: 0 8px 32px rgba(22,163,74,0.18);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hind Siliguri',sans-serif;background:#f0fdf4;color:var(--text);min-height:100vh;}
+
+/* ── HEADER ── */
+header{background:linear-gradient(135deg,#064e24 0%,#16a34a 100%);color:#fff;position:sticky;top:0;z-index:200;box-shadow:0 3px 20px rgba(0,0,0,0.25);}
+.hdr{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 16px;gap:10px;}
+.logo{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:7px;white-space:nowrap;}
+.logo-icon{font-size:1.5rem;}
+.nav{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+.nav-btn{background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:#fff;padding:6px 13px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:0.82rem;font-weight:600;transition:all .18s;white-space:nowrap;}
+.nav-btn:hover,.nav-btn.on{background:#fff;color:var(--green-dark);}
+.nav-btn.add{background:var(--amber);border-color:var(--amber-dark);color:#1a1a1a;}
+.nav-btn.add:hover{background:var(--amber-dark);}
+.badge-dot{display:inline-block;width:8px;height:8px;background:var(--red);border-radius:50%;margin-left:4px;vertical-align:middle;}
+
+/* ── PAGES ── */
+.page{display:none;}.page.on{display:block;}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 14px;}
+
+/* ── LOGIN ── */
+#loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#064e24,#22c55e);padding:20px;}
+.login-box{background:#fff;border-radius:22px;padding:38px 32px;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,0.28);text-align:center;}
+.login-logo{font-size:3rem;margin-bottom:8px;}
+.login-box h2{font-size:1.7rem;font-weight:800;color:var(--green-dark);margin-bottom:4px;}
+.login-box p{color:var(--text-muted);margin-bottom:24px;font-size:0.9rem;}
+.tabs-login{display:flex;background:#f3f4f6;border-radius:10px;padding:4px;margin-bottom:22px;}
+.tab-login{flex:1;padding:8px;border-radius:7px;border:none;background:transparent;font-family:inherit;font-size:0.88rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .18s;}
+.tab-login.on{background:#fff;color:var(--green-dark);box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+
+/* ── FORM ── */
+.fi{width:100%;padding:11px 14px;border:1.8px solid #d1d5db;border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;outline:none;transition:border-color .18s;color:var(--text);background:#fff;}
+.fi:focus{border-color:var(--green);}
+.fg{margin-bottom:14px;}
+.fg label{display:block;margin-bottom:5px;font-weight:600;font-size:0.88rem;color:var(--text);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+textarea.fi{resize:vertical;min-height:80px;}
+.btn-primary{width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px);}
+.or-divider{text-align:center;margin:16px 0;color:var(--text-muted);font-size:0.85rem;position:relative;}
+.or-divider::before,.or-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:#e5e7eb;}
+.or-divider::before{left:0;}.or-divider::after{right:0;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#064e24 0%,#16a34a 100%);color:#fff;padding:48px 20px 40px;text-align:center;}
+.hero h1{font-size:2.2rem;font-weight:900;margin-bottom:10px;text-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.hero p{font-size:1.05rem;opacity:.9;margin-bottom:26px;}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn-white{padding:11px 28px;border-radius:25px;background:#fff;color:var(--green-dark);border:none;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.18);}
+.btn-outline-w{padding:11px 28px;border-radius:25px;background:transparent;color:#fff;border:2px solid #fff;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-outline-w:hover{background:#fff;color:var(--green-dark);}
+
+/* ── STATS ── */
+.stats{background:#fff;border-bottom:1.5px solid var(--border);}
+.stats-in{max-width:1200px;margin:0 auto;display:flex;gap:0;padding:0 14px;}
+.stat{flex:1;padding:14px 0;text-align:center;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-n{font-size:1.5rem;font-weight:800;color:var(--green);}
+.stat-l{font-size:0.72rem;color:var(--text-muted);margin-top:2px;}
+
+/* ── FILTERS ── */
+.filters{background:#fff;border-radius:var(--radius);padding:15px 18px;margin-bottom:18px;box-shadow:var(--shadow);display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.filters select,.filters input{padding:8px 13px;border:1.5px solid var(--border);border-radius:20px;font-family:inherit;font-size:0.88rem;background:var(--green-bg);outline:none;color:var(--text);}
+.filters select:focus,.filters input:focus{border-color:var(--green);}
+.filters input{flex:1;min-width:160px;}
+
+/* ── ADS GRID ── */
+.ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;}
+.ad-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all .22s;border:1.5px solid transparent;cursor:pointer;}
+.ad-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--green-light);}
+.ad-thumb{width:100%;height:190px;object-fit:cover;background:linear-gradient(135deg,#dcfce7,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;}
+.ad-thumb img{width:100%;height:100%;object-fit:cover;}
+.sold-badge{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:700;}
+.ad-body{padding:14px 15px;}
+.ad-title{font-size:1rem;font-weight:700;margin-bottom:5px;line-height:1.3;}
+.ad-price{font-size:1.25rem;font-weight:800;color:var(--green);margin-bottom:8px;}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px;}
+.tag{background:#dcfce7;color:#15803d;padding:3px 9px;border-radius:12px;font-size:.72rem;font-weight:600;}
+.tag.used{background:#fef3c7;color:#92400e;}
+.tag.new{background:#dbeafe;color:#1e40af;}
+.ad-meta{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-muted);margin-bottom:10px;}
+.ad-foot{display:flex;gap:7px;padding-top:10px;border-top:1px solid #f0fdf4;}
+.ad-act{flex:1;padding:8px;border-radius:9px;border:none;cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:600;transition:all .18s;}
+.msg-act{background:var(--green);color:#fff;}
+.msg-act:hover{background:var(--green-dark);}
+.fav-act{background:var(--green-bg);color:var(--text-muted);border:1.5px solid var(--border);}
+.fav-act:hover{background:#fee2e2;color:var(--red);border-color:var(--red);}
+.fav-act.loved{background:#fee2e2;color:var(--red);border-color:var(--red);}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:64px 20px;color:var(--text-muted);grid-column:1/-1;}
+.empty .ei{font-size:4rem;margin-bottom:14px;}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(4px);}
+.overlay.on{display:flex;}
+.modal{background:#fff;border-radius:var(--radius);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3);}
+.modal-hdr{padding:18px 22px 14px;border-bottom:1.5px solid #f0fdf4;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:2;}
+.modal-hdr h3{font-size:1.1rem;font-weight:700;}
+.close-btn{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-muted);transition:color .18s;}
+.close-btn:hover{color:var(--red);}
+.modal-body{padding:22px;}
+
+/* ── AD DETAIL ── */
+.detail-img{width:100%;height:300px;object-fit:cover;border-radius:var(--radius);margin-bottom:18px;background:linear-gradient(135deg,#dcfce7,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:6rem;}
+.detail-price{font-size:1.9rem;font-weight:800;color:var(--green);margin:8px 0;}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
+.dg-item{background:var(--green-bg);padding:10px 13px;border-radius:10px;}
+.dg-item label{font-size:.72rem;color:var(--text-muted);display:block;margin-bottom:3px;}
+.dg-item span{font-weight:600;font-size:.92rem;}
+.detail-desc{line-height:1.8;color:var(--text);margin:12px 0;background:#f9fafb;padding:14px;border-radius:10px;}
+.detail-msg-btn{width:100%;padding:13px;background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:10px;}
+.detail-msg-btn:hover{background:var(--green-dark);}
+
+/* ── MESSAGES PAGE ── */
+.msg-layout{display:grid;grid-template-columns:300px 1fr;gap:16px;height:calc(100vh - 130px);min-height:520px;}
+.conv-panel{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.conv-hdr{padding:14px 16px;border-bottom:1.5px solid var(--border);font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px;}
+.conv-list{flex:1;overflow-y:auto;}
+.conv-item{padding:13px 15px;border-bottom:1px solid #f0fdf4;cursor:pointer;transition:background .15s;display:flex;gap:11px;align-items:center;}
+.conv-item:hover,.conv-item.on{background:var(--green-bg);}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0;}
+.conv-info{flex:1;min-width:0;}
+.conv-name{font-weight:700;font-size:.87rem;}
+.conv-prev{font-size:.76rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.conv-time{font-size:.7rem;color:var(--text-muted);white-space:nowrap;}
+.unread-dot{width:9px;height:9px;background:var(--green);border-radius:50%;flex-shrink:0;}
+.chat-panel{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.chat-hdr{padding:13px 18px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.chat-hdr .avatar{width:38px;height:38px;font-size:.9rem;}
+.chat-name{font-weight:700;font-size:.95rem;}
+.chat-ref{font-size:.73rem;color:var(--text-muted);}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f9fefb;}
+.no-chat{flex:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);flex-direction:column;gap:12px;background:#f9fefb;}
+.bubble-wrap{display:flex;flex-direction:column;}
+.bubble-wrap.mine{align-items:flex-end;}
+.bubble-wrap.theirs{align-items:flex-start;}
+.bubble{max-width:72%;padding:9px 14px;border-radius:16px;font-size:.88rem;line-height:1.55;word-break:break-word;}
+.bubble-wrap.mine .bubble{background:var(--green);color:#fff;border-bottom-right-radius:4px;}
+.bubble-wrap.theirs .bubble{background:#fff;color:var(--text);border:1.5px solid var(--border);border-bottom-left-radius:4px;}
+.btime{font-size:.67rem;color:var(--text-muted);margin-top:3px;}
+.chat-inp-wrap{padding:12px 14px;border-top:1.5px solid var(--border);display:flex;gap:9px;align-items:center;flex-shrink:0;}
+.chat-inp{flex:1;padding:10px 16px;border:1.5px solid var(--border);border-radius:24px;font-family:inherit;font-size:.9rem;outline:none;background:#f9fefb;}
+.chat-inp:focus{border-color:var(--green);}
+.send-btn{width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.send-btn:hover{background:var(--green-dark);}
+.conv-empty{padding:24px;text-align:center;color:var(--text-muted);font-size:.85rem;}
+
+/* ── ADMIN ── */
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px;}
+.ast{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);border-left:4px solid var(--green);}
+.ast .n{font-size:1.8rem;font-weight:800;color:var(--green);}
+.ast .l{font-size:.82rem;color:var(--text-muted);margin-top:3px;}
+.ast.red{border-left-color:var(--red);}
+.ast.amber{border-left-color:var(--amber);}
+.ast.blue{border-left-color:var(--blue);}
+.ast.red .n{color:var(--red);}
+.ast.amber .n{color:var(--amber);}
+.ast.blue .n{color:var(--blue);}
+.card{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px;overflow-x:auto;}
+.card h3{margin-bottom:14px;font-size:1rem;font-weight:700;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+th{background:var(--green-bg);padding:9px 13px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);font-size:.8rem;}
+td{padding:9px 13px;border-bottom:1px solid #f0fdf4;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+.sbadge{padding:3px 9px;border-radius:12px;font-size:.72rem;font-weight:700;}
+.sbadge.active{background:#dcfce7;color:#15803d;}
+.sbadge.sold{background:#fee2e2;color:var(--red);}
+.sbadge.pending{background:#fef3c7;color:#92400e;}
+.act-btn{padding:5px 11px;border-radius:7px;border:none;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;transition:all .18s;margin-right:4px;}
+.approve-btn{background:#dcfce7;color:#15803d;}
+.approve-btn:hover{background:var(--green);color:#fff;}
+.del-btn{background:#fee2e2;color:var(--red);}
+.del-btn:hover{background:var(--red);color:#fff;}
+.sold-btn{background:#fef3c7;color:#92400e;}
+.sold-btn:hover{background:var(--amber);color:#1a1a1a;}
+
+/* ── PROFILE ── */
+.profile-hdr{background:#fff;border-radius:var(--radius);padding:24px;margin-bottom:18px;box-shadow:var(--shadow);display:flex;gap:18px;align-items:center;}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),var(--green-light));color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:700;flex-shrink:0;}
+.profile-info h2{font-size:1.3rem;font-weight:700;}
+.profile-info p{color:var(--text-muted);font-size:.88rem;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--green-dark);color:#fff;padding:13px 20px;border-radius:12px;font-weight:600;z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s;max-width:300px;font-size:.9rem;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.err{background:var(--red);}
+
+/* ── SECTION TITLE ── */
+.sec-title{font-size:1.2rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* ── IMG PREVIEW ── */
+.img-prev-wrap{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px;}
+.img-prev{width:72px;height:72px;object-fit:cover;border-radius:8px;border:2px solid var(--border);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:680px){
+  .hero h1{font-size:1.55rem;}
+  .msg-layout{grid-template-columns:1fr;height:auto;}
+  .conv-panel{height:280px;}
+  .chat-panel{height:480px;}
+  .frow{grid-template-columns:1fr;}
+  .detail-grid{grid-template-columns:1fr;}
+  .nav{gap:3px;}
+  .nav-btn{padding:5px 9px;font-size:.75rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LOGIN ═══════════ -->
+<div id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo">🚲</div>
+    <h2>সাইকেল বাজার</h2>
+    <p>সাইকেল কিনুন ও বিক্রি করুন সহজেই</p>
+    <div class="tabs-login">
+      <button class="tab-login on" onclick="switchLoginTab('user')">👤 ব্যবহারকারী</button>
+      <button class="tab-login" onclick="switchLoginTab('admin')">🔐 অ্যাডমিন</button>
+    </div>
+    <div id="userLoginForm">
+      <div class="fg"><label>আপনার নাম</label><input class="fi" id="lName" placeholder="যেমন: রাহিম মিয়া" /></div>
+      <div class="fg"><label>ফোন নম্বর</label><input class="fi" id="lPhone" placeholder="01XXXXXXXXX" type="tel" /></div>
+      <button class="btn-primary" onclick="doLogin()">🚲 লগইন / রেজিস্ট্রেশন</button>
+      <p style="margin-top:12px;font-size:.8rem;color:var(--text-muted);">নতুন হলেও একই নম্বর দিয়ে লগইন করুন — অ্যাকাউন্ট স্বয়ংক্রিয়ভাবে তৈরি হবে</p>
+    </div>
+    <div id="adminLoginForm" style="display:none">
+      <div class="fg"><label>অ্যাডমিন পাসওয়ার্ড</label><input class="fi" id="aPass" type="password" placeholder="পাসওয়ার্ড দিন" /></div>
+      <button class="btn-primary" onclick="doAdminLogin()">🔐 অ্যাডমিন লগইন</button>
+      <p style="margin-top:12px;font-size:.8rem;color:var(--text-muted);">ডিফল্ট পাসওয়ার্ড: <strong>admin2024</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MAIN APP ═══════════ -->
+<div id="mainApp" style="display:none">
+
+  <header>
+    <div class="hdr">
+      <div class="logo"><span class="logo-icon">🚲</span> সাইকেল বাজার</div>
+      <nav class="nav">
+        <button class="nav-btn on" onclick="showPage('home')" id="nb-home">🏠 হোম</button>
+        <button class="nav-btn" onclick="showPage('favs')" id="nb-favs">❤️ পছন্দ</button>
+        <button class="nav-btn" onclick="showPage('msgs')" id="nb-msgs">💬 মেসেজ <span id="msgDot" class="badge-dot" style="display:none"></span></button>
+        <button class="nav-btn" onclick="showPage('profile')" id="nb-profile">👤 প্রোফাইল</button>
+        <button class="nav-btn add" onclick="openAdModal()">➕ বিজ্ঞাপন দিন</button>
+        <button class="nav-btn" id="nb-admin" style="display:none" onclick="showPage('admin')">⚙️ অ্যাডমিন</button>
+        <button class="nav-btn" onclick="doLogout()" style="background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4)">🚪</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HOME PAGE -->
+  <div class="page on" id="pg-home">
+    <div class="hero">
+      <h1>সাইকেল কিনুন ও বেচুন 🚲</h1>
+      <p>হাজারো সাইকেলের বিজ্ঞাপন — সেরা দামে পান আপনার পছন্দের সাইকেল</p>
+      <div class="hero-btns">
+        <button class="btn-white" onclick="openAdModal()">➕ বিজ্ঞাপন দিন</button>
+        <button class="btn-outline-w" onclick="document.getElementById('searchInp').focus();window.scrollTo(0,200)">🔍 সাইকেল খুঁজুন</button>
+      </div>
+    </div>
+    <div class="stats" id="statsBar">
+      <div class="stats-in">
+        <div class="stat"><div class="stat-n" id="st-total">০</div><div class="stat-l">মোট বিজ্ঞাপন</div></div>
+        <div class="stat"><div class="stat-n" id="st-active">০</div><div class="stat-l">সক্রিয়</div></div>
+        <div class="stat"><div class="stat-n" id="st-sold">০</div><div class="stat-l">বিক্রিত</div></div>
+        <div class="stat"><div class="stat-n" id="st-users">০</div><div class="stat-l">ব্যবহারকারী</div></div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="filters">
+        <input class="fi" id="searchInp" placeholder="🔍 সাইকেল খুঁজুন..." oninput="applyFilter()" style="border-radius:20px;" />
+        <select class="fi" id="filterType" onchange="applyFilter()" style="border-radius:20px;">
+          <option value="all">সব ধরন</option>
+          <option value="রোড">রোড বাইক</option>
+          <option value="মাউন্টেন">মাউন্টেন বাইক</option>
+          <option value="সিটি">সিটি বাইক</option>
+          <option value="বিএমএক্স">বিএমএক্স</option>
+          <option value="হাইব্রিড">হাইব্রিড</option>
+          <option value="ভাঁজযোগ্য">ভাঁজযোগ্য</option>
+          <option value="শিশু">শিশু সাইকেল</option>
+          <option value="অন্যান্য">অন্যান্য</option>
+        </select>
+        <select class="fi" id="filterCond" onchange="applyFilter()" style="border-radius:20px;">
+          <option value="all">সব অবস্থা</option>
+          <option value="new">নতুন</option>
+          <option value="used">পুরাতন</option>
+        </select>
+        <select class="fi" id="filterSort" onchange="applyFilter()" style="border-radius:20px;">
+          <option value="new">নতুন আগে</option>
+          <option value="low">কম দামে</option>
+          <option value="high">বেশি দামে</option>
+        </select>
+      </div>
+      <div class="ads-grid" id="adsGrid"><div class="empty"><div class="ei">⏳</div><p>লোড হচ্ছে...</p></div></div>
+    </div>
+  </div>
+
+  <!-- FAVS PAGE -->
+  <div class="page" id="pg-favs">
+    <div class="wrap">
+      <div class="sec-title">❤️ পছন্দের সাইকেল</div>
+      <div class="ads-grid" id="favsGrid"><div class="empty"><div class="ei">❤️</div><p>এখনো কোনো পছন্দ নেই</p></div></div>
+    </div>
+  </div>
+
+  <!-- MESSAGES PAGE -->
+  <div class="page" id="pg-msgs">
+    <div class="wrap">
+      <div class="msg-layout">
+        <!-- Conversation List -->
+        <div class="conv-panel">
+          <div class="conv-hdr">💬 মেসেজ তালিকা</div>
+          <div class="conv-list" id="convList">
+            <div class="conv-empty">মেসেজ নেই। কোনো বিজ্ঞাপনে মেসেজ করুন।</div>
+          </div>
+        </div>
+        <!-- Chat Window -->
+        <div class="chat-panel" id="chatPanel">
+          <div class="no-chat" id="noChatSel">
+            <div style="font-size:3rem">💬</div>
+            <div>বাম পাশ থেকে একটি কথোপকথন বেছে নিন</div>
+          </div>
+          <div id="chatView" style="display:none;flex:1;display:none;flex-direction:column;overflow:hidden;">
+            <div class="chat-hdr" id="chatHdr"></div>
+            <div class="chat-msgs" id="chatMsgs"></div>
+            <div class="chat-inp-wrap">
+              <input class="chat-inp" id="chatInp" placeholder="মেসেজ লিখুন..." onkeydown="if(event.key==='Enter')sendMsg()" />
+              <button class="send-btn" onclick="sendMsg()">➤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE PAGE -->
+  <div class="page" id="pg-profile">
+    <div class="wrap">
+      <div class="profile-hdr" id="profileHdr"></div>
+      <div class="sec-title">📋 আমার বিজ্ঞাপন</div>
+      <div class="ads-grid" id="myAdsGrid"><div class="empty"><div class="ei">📋</div><p>আপনার কোনো বিজ্ঞাপন নেই</p></div></div>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div class="page" id="pg-admin">
+    <div class="wrap">
+      <div class="sec-title">⚙️ অ্যাডমিন প্যানেল</div>
+      <div class="admin-stats">
+        <div class="ast"><div class="n" id="ad-total">0</div><div class="l">মোট বিজ্ঞাপন</div></div>
+        <div class="ast amber"><div class="n" id="ad-pending">0</div><div class="l">অনুমোদন বাকি</div></div>
+        <div class="ast red"><div class="n" id="ad-sold">0</div><div class="l">বিক্রিত</div></div>
+        <div class="ast blue"><div class="n" id="ad-users">0</div><div class="l">ব্যবহারকারী</div></div>
+      </div>
+      <div class="card">
+        <h3>📋 সকল বিজ্ঞাপন</h3>
+        <table>
+          <thead><tr><th>বিজ্ঞাপন</th><th>বিক্রেতা</th><th>দাম</th><th>অবস্থা</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead>
+          <tbody id="adminAdsTable"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>👥 ব্যবহারকারী</h3>
+        <table>
+          <thead><tr><th>নাম</th><th>ফোন</th><th>যোগদান</th></tr></thead>
+          <tbody id="adminUsersTable"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <h3>🔐 পাসওয়ার্ড পরিবর্তন</h3>
+        </div>
+        <div style="display:flex;gap:10px;max-width:400px;">
+          <input class="fi" id="newPassInp" type="password" placeholder="নতুন পাসওয়ার্ড" />
+          <button class="btn-primary" style="width:auto;padding:11px 20px;" onclick="changeAdminPass()">পরিবর্তন</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /mainApp -->
+
+<!-- ═══════════ MODALS ═══════════ -->
+
+<!-- Post Ad Modal -->
+<div class="overlay" id="adModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3>➕ নতুন বিজ্ঞাপন দিন</h3><button class="close-btn" onclick="closeModal('adModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="fg"><label>বিজ্ঞাপনের শিরোনাম *</label><input class="fi" id="adTitle" placeholder="যেমন: Hero Ranger ২১ গিয়ার সাইকেল" /></div>
+      <div class="frow">
+        <div class="fg"><label>দাম (টাকা) *</label><input class="fi" id="adPrice" type="number" placeholder="যেমন: 8500" /></div>
+        <div class="fg"><label>অবস্থা *</label>
+          <select class="fi" id="adCond">
+            <option value="used">পুরাতন</option>
+            <option value="new">নতুন</option>
+          </select>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>ধরন</label>
+          <select class="fi" id="adType">
+            <option value="রোড">রোড বাইক</option>
+            <option value="মাউন্টেন">মাউন্টেন বাইক</option>
+            <option value="সিটি">সিটি বাইক</option>
+            <option value="বিএমএক্স">বিএমএক্স</option>
+            <option value="হাইব্রিড">হাইব্রিড</option>
+            <option value="ভাঁজযোগ্য">ভাঁজযোগ্য</option>
+            <option value="শিশু">শিশু সাইকেল</option>
+            <option value="অন্যান্য">অন্যান্য</option>
+          </select>
+        </div>
+        <div class="fg"><label>ব্র্যান্ড</label><input class="fi" id="adBrand" placeholder="যেমন: Hero, Atlas, Phoenix" /></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>অবস্থান *</label><input class="fi" id="adLoc" placeholder="যেমন: ঢাকা, চট্টগ্রাম" /></div>
+        <div class="fg"><label>যোগাযোগ নম্বর *</label><input class="fi" id="adContact" placeholder="01XXXXXXXXX" /></div>
+      </div>
+      <div class="fg"><label>বিবরণ</label><textarea class="fi" id="adDesc" placeholder="সাইকেলের বিস্তারিত বিবরণ লিখুন..."></textarea></div>
+      <div class="fg">
+        <label>ছবি আপলোড</label>
+        <input class="fi" id="adImg" type="file" accept="image/*" onchange="previewImg(this)" />
+        <div class="img-prev-wrap" id="imgPrev"></div>
+      </div>
+      <button class="btn-primary" onclick="postAd()">📤 বিজ্ঞাপন প্রকাশ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ad Detail Modal -->
+<div class="overlay" id="detailModal">
+  <div class="modal" style="max-width:620px">
+    <div class="modal-hdr"><h3 id="detailTitle">বিজ্ঞাপন বিবরণ</h3><button class="close-btn" onclick="closeModal('detailModal')">✕</button></div>
+    <div class="modal-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- Message Modal (quick msg from ad card) -->
+<div class="overlay" id="msgModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-hdr"><h3 id="msgModalTitle">💬 মেসেজ পাঠান</h3><button class="close-btn" onclick="closeModal('msgModal')">✕</button></div>
+    <div class="modal-body">
+      <div style="background:var(--green-bg);padding:12px 14px;border-radius:10px;margin-bottom:14px;font-size:.88rem;" id="msgAdRef"></div>
+      <div class="fg"><label>আপনার মেসেজ</label><textarea class="fi" id="msgText" rows="3" placeholder="মেসেজ লিখুন..."></textarea></div>
+      <button class="btn-primary" onclick="sendQuickMsg()">📤 পাঠান</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════ FIREBASE + JS ═══════════ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getDatabase, ref, push, onValue, set, update, remove, get
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// ╔══════════════════════════════════════════════╗
+// ║  🔥 FIREBASE CONFIG — এখানে আপনার config   ║
+// ║  বসান। Firebase Console থেকে কপি করুন।     ║
+// ╚══════════════════════════════════════════════╝
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ── STATE ──
+let CU = null; // current user
+let allAds = [];
+let favs = JSON.parse(localStorage.getItem('cb_favs') || '[]');
+let adminPass = localStorage.getItem('cb_apass') || 'admin2024';
+let activeCid = null;
+let quickMsgTarget = null;
+let unsubConv = null;
+let unsubMsgs = null;
+
+// ── LOGIN TAB SWITCH ──
+window.switchLoginTab = t => {
+  document.getElementById('userLoginForm').style.display = t === 'user' ? 'block' : 'none';
+  document.getElementById('adminLoginForm').style.display = t === 'admin' ? 'block' : 'none';
+  document.querySelectorAll('.tab-login').forEach((b,i) => b.classList.toggle('on', (t==='user'&&i===0)||(t==='admin'&&i===1)));
+};
+
+// ── USER LOGIN ──
+window.doLogin = () => {
+  const name = document.getElementById('lName').value.trim();
+  const phone = document.getElementById('lPhone').value.trim();
+  if (!name || !phone) return toast('নাম ও ফোন নম্বর দিন', true);
+  if (!/^01[3-9]\d{8}$/.test(phone)) return toast('সঠিক বাংলাদেশি ফোন নম্বর দিন (11 ডিজিট)', true);
+  const uid = 'u_' + phone;
+  const ud = { name, phone, uid, joinedAt: Date.now() };
+  set(ref(db, 'users/' + uid), ud);
+  CU = ud;
+  localStorage.setItem('cb_cu', JSON.stringify(CU));
+  startApp();
+};
+
+// ── ADMIN LOGIN ──
+window.doAdminLogin = () => {
+  const p = document.getElementById('aPass').value;
+  if (p === adminPass) {
+    CU = { name: 'অ্যাডমিন', phone: 'admin', uid: 'admin', isAdmin: true };
+    localStorage.setItem('cb_cu', JSON.stringify(CU));
+    startApp();
+    showPage('admin');
+    toast('অ্যাডমিন প্যানেলে স্বাগতম! ⚙️');
+  } else toast('ভুল পাসওয়ার্ড!', true);
+};
+
+// ── LOGOUT ──
+window.doLogout = () => { localStorage.removeItem('cb_cu'); location.reload(); };
+
+// ── START APP ──
+function startApp() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  if (CU && CU.isAdmin) document.getElementById('nb-admin').style.display = 'inline-block';
+  loadAds();
+  loadConvList();
+  renderProfile();
+  toast('স্বাগতম, ' + CU.name + '! 🚲');
+}
+
+// ── RESTORE SESSION ──
+(function restoreSession() {
+  const saved = localStorage.getItem('cb_cu');
+  if (saved) { CU = JSON.parse(saved); startApp(); }
+})();
+
+// ── PAGE NAV ──
+window.showPage = pg => {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('pg-' + pg).classList.add('on');
+  const nb = document.getElementById('nb-' + pg);
+  if (nb) nb.classList.add('on');
+  if (pg === 'favs') renderFavs();
+  if (pg === 'profile') renderMyAds();
+  if (pg === 'admin') renderAdmin();
+};
+
+// ── OPEN AD MODAL ──
+window.openAdModal = () => {
+  if (!CU) return toast('আগে লগইন করুন', true);
+  openModal('adModal');
+};
+
+// ── MODAL HELPERS ──
+window.openModal = id => document.getElementById(id).classList.add('on');
+window.closeModal = id => document.getElementById(id).classList.remove('on');
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target===o) o.classList.remove('on'); }));
+
+// ── IMAGE PREVIEW ──
+window.previewImg = inp => {
+  const wrap = document.getElementById('imgPrev');
+  wrap.innerHTML = '';
+  if (inp.files[0]) {
+    const r = new FileReader();
+    r.onload = e => { const img = document.createElement('img'); img.src = e.target.result; img.className = 'img-prev'; wrap.appendChild(img); };
+    r.readAsDataURL(inp.files[0]);
+  }
+};
+
+// ── POST AD ──
+window.postAd = () => {
+  const title = document.getElementById('adTitle').value.trim();
+  const price = document.getElementById('adPrice').value.trim();
+  const cond = document.getElementById('adCond').value;
+  const type = document.getElementById('adType').value;
+  const brand = document.getElementById('adBrand').value.trim();
+  const loc = document.getElementById('adLoc').value.trim();
+  const contact = document.getElementById('adContact').value.trim();
+  const desc = document.getElementById('adDesc').value.trim();
+  const imgInp = document.getElementById('adImg');
+  if (!title || !price || !loc || !contact) return toast('শিরোনাম, দাম, অবস্থান ও যোগাযোগ নম্বর আবশ্যক', true);
+  const save = imgData => {
+    push(ref(db, 'ads'), {
+      title, price: parseInt(price), cond, type, brand, loc, contact, desc,
+      sellerName: CU.name, sellerId: CU.uid, sellerPhone: CU.phone,
+      createdAt: Date.now(), status: 'active', img: imgData || ''
+    });
+    closeModal('adModal');
+    document.getElementById('adTitle').value=''; document.getElementById('adPrice').value='';
+    document.getElementById('adBrand').value=''; document.getElementById('adLoc').value='';
+    document.getElementById('adContact').value=''; document.getElementById('adDesc').value='';
+    document.getElementById('adImg').value=''; document.getElementById('imgPrev').innerHTML='';
+    toast('বিজ্ঞাপন প্রকাশিত হয়েছে! 🎉');
+  };
+  if (imgInp.files[0]) { const r=new FileReader(); r.onload=e=>save(e.target.result); r.readAsDataURL(imgInp.files[0]); }
+  else save('');
+};
+
+// ── LOAD ADS ──
+function loadAds() {
+  onValue(ref(db, 'ads'), snap => {
+    allAds = [];
+    snap.forEach(c => allAds.push({ id: c.key, ...c.val() }));
+    allAds.reverse();
+    renderAds(allAds);
+    updateStats();
+  });
+}
+
+function applyFilter_() {
+  let ads = [...allAds].filter(a => a.status !== 'deleted');
+  const s = document.getElementById('searchInp').value.trim().toLowerCase();
+  const type = document.getElementById('filterType').value;
+  const cond = document.getElementById('filterCond').value;
+  const sort = document.getElementById('filterSort').value;
+  if (s) ads = ads.filter(a => (a.title||'').toLowerCase().includes(s)||(a.brand||'').toLowerCase().includes(s)||(a.loc||'').toLowerCase().includes(s));
+  if (type !== 'all') ads = ads.filter(a => a.type === type);
+  if (cond !== 'all') ads = ads.filter(a => a.cond === cond);
+  if (sort === 'low') ads.sort((a,b) => a.price - b.price);
+  else if (sort === 'high') ads.sort((a,b) => b.price - a.price);
+  renderAds(ads);
+}
+window.applyFilter = applyFilter_;
+
+function renderAds(ads) {
+  const g = document.getElementById('adsGrid');
+  const list = ads.filter(a => a.status !== 'deleted');
+  if (!list.length) { g.innerHTML = `<div class="empty"><div class="ei">🚲</div><h3>কোনো বিজ্ঞাপন নেই</h3><p>প্রথম বিজ্ঞাপন দিন!</p></div>`; return; }
+  g.innerHTML = list.map(adCard).join('');
+}
+
+function adCard(ad) {
+  const isFav = favs.includes(ad.id);
+  const img = ad.img ? `<img src="${ad.img}" alt="${ad.title}" style="width:100%;height:100%;object-fit:cover">` : '🚲';
+  return `<div style="position:relative">
+    ${ad.status==='sold'?'<div class="sold-badge">বিক্রিত</div>':''}
+    <div class="ad-card" onclick="viewAd('${ad.id}')">
+      <div class="ad-thumb">${img}</div>
+      <div class="ad-body">
+        <div class="ad-title">${esc(ad.title)}</div>
+        <div class="ad-price">৳ ${ad.price?.toLocaleString('bn-BD')||0}</div>
+        <div class="tags">
+          <span class="tag">${ad.type||''}</span>
+          <span class="tag ${ad.cond}">${ad.cond==='new'?'নতুন':'পুরাতন'}</span>
+          ${ad.brand?`<span class="tag">${esc(ad.brand)}</span>`:''}
+        </div>
+        <div class="ad-meta">
+          <span>👤 ${esc(ad.sellerName)}</span>
+          <span>📍 ${esc(ad.loc||'')}</span>
+        </div>
+        <div class="ad-foot" onclick="event.stopPropagation()">
+          <button class="ad-act msg-act" onclick="openQuickMsg('${ad.id}','${esc(ad.title)}','${ad.sellerId}','${esc(ad.sellerName)}')">💬 মেসেজ করুন</button>
+          <button class="ad-act fav-act ${isFav?'loved':''}" id="fav-${ad.id}" onclick="toggleFav('${ad.id}',this)">${isFav?'❤️':'🤍'}</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── VIEW AD DETAIL ──
+window.viewAd = id => {
+  const ad = allAds.find(a => a.id === id);
+  if (!ad) return;
+  document.getElementById('detailTitle').textContent = ad.title;
+  const img = ad.img ? `<img src="${ad.img}" style="width:100%;height:280px;object-fit:cover;border-radius:12px;margin-bottom:16px">` : `<div class="detail-img">🚲</div>`;
+  document.getElementById('detailBody').innerHTML = `
+    ${img}
+    <div class="detail-price">৳ ${ad.price?.toLocaleString('bn-BD')||0}</div>
+    <div class="tags" style="margin-bottom:12px">
+      <span class="tag">${ad.type||''}</span>
+      <span class="tag ${ad.cond}">${ad.cond==='new'?'নতুন':'পুরাতন'}</span>
+      ${ad.brand?`<span class="tag">${esc(ad.brand)}</span>`:''}
+      ${ad.status==='sold'?'<span class="tag" style="background:#fee2e2;color:#dc2626">বিক্রিত</span>':''}
+    </div>
+    <div class="detail-grid">
+      <div class="dg-item"><label>বিক্রেতা</label><span>👤 ${esc(ad.sellerName)}</span></div>
+      <div class="dg-item"><label>অবস্থান</label><span>📍 ${esc(ad.loc||'')}</span></div>
+      <div class="dg-item"><label>যোগাযোগ</label><span>📞 ${esc(ad.contact||'')}</span></div>
+      <div class="dg-item"><label>তারিখ</label><span>📅 ${new Date(ad.createdAt).toLocaleDateString('bn-BD')}</span></div>
+    </div>
+    ${ad.desc?`<div class="detail-desc">${esc(ad.desc)}</div>`:''}
+    <button class="detail-msg-btn" onclick="closeModal('detailModal');openQuickMsg('${ad.id}','${esc(ad.title)}','${ad.sellerId}','${esc(ad.sellerName)}')">💬 বিক্রেতাকে মেসেজ করুন</button>
+  `;
+  openModal('detailModal');
+};
+
+// ── FAVOURITES ──
+window.toggleFav = (id, btn) => {
+  if (favs.includes(id)) { favs = favs.filter(f => f !== id); btn.textContent = '🤍'; btn.classList.remove('loved'); }
+  else { favs.push(id); btn.textContent = '❤️'; btn.classList.add('loved'); }
+  localStorage.setItem('cb_favs', JSON.stringify(favs));
+};
+
+function renderFavs() {
+  const list = allAds.filter(a => favs.includes(a.id) && a.status !== 'deleted');
+  const g = document.getElementById('favsGrid');
+  g.innerHTML = list.length ? list.map(adCard).join('') : `<div class="empty"><div class="ei">❤️</div><p>কোনো পছন্দ নেই</p></div>`;
+}
+
+// ── STATS ──
+function updateStats() {
+  const total = allAds.filter(a => a.status !== 'deleted').length;
+  const active = allAds.filter(a => a.status === 'active').length;
+  const sold = allAds.filter(a => a.status === 'sold').length;
+  document.getElementById('st-total').textContent = toBn(total);
+  document.getElementById('st-active').textContent = toBn(active);
+  document.getElementById('st-sold').textContent = toBn(sold);
+  get(ref(db, 'users')).then(s => { document.getElementById('st-users').textContent = toBn(s.size || 0); });
+}
+
+// ══════════════════════════════════════
+// ── MESSAGING SYSTEM ──
+// ══════════════════════════════════════
+
+// Conversation ID = sorted UIDs joined
+function convId(uid1, uid2) {
+  return [uid1, uid2].sort().join('__');
+}
+
+// ── OPEN QUICK MSG FROM AD CARD ──
+window.openQuickMsg = (adId, adTitle, sellerId, sellerName) => {
+  if (!CU) return toast('আগে লগইন করুন', true);
+  if (CU.uid === sellerId) return toast('নিজের বিজ্ঞাপনে মেসেজ করা যাবে না', true);
+  quickMsgTarget = { adId, adTitle, sellerId, sellerName };
+  document.getElementById('msgModalTitle').textContent = `💬 ${sellerName}-কে মেসেজ করুন`;
+  document.getElementById('msgAdRef').textContent = `📋 বিজ্ঞাপন: ${adTitle}`;
+  document.getElementById('msgText').value = '';
+  openModal('msgModal');
+};
+
+// ── SEND QUICK MSG ──
+window.sendQuickMsg = () => {
+  const text = document.getElementById('msgText').value.trim();
+  if (!text) return toast('মেসেজ লিখুন', true);
+  const t = quickMsgTarget;
+  const cid = convId(CU.uid, t.sellerId);
+  const msgData = {
+    text, senderId: CU.uid, senderName: CU.name,
+    receiverId: t.sellerId, receiverName: t.sellerName,
+    adId: t.adId, adTitle: t.adTitle,
+    createdAt: Date.now(), read: false
+  };
+  // Save message
+  push(ref(db, `msgs/${cid}`), msgData);
+  // Save/update conversation metadata for both users
+  const convMeta = {
+    members: { [CU.uid]: CU.name, [t.sellerId]: t.sellerName },
+    adId: t.adId, adTitle: t.adTitle,
+    lastMsg: text, lastAt: Date.now(),
+    [CU.uid + '_read']: true,
+    [t.sellerId + '_read']: false
+  };
+  set(ref(db, `convs/${cid}`), convMeta);
+  closeModal('msgModal');
+  toast('মেসেজ পাঠানো হয়েছে! ✅');
+  showPage('msgs');
+  setTimeout(() => openConv(cid, t.sellerId, t.sellerName, t.adTitle), 400);
+};
+
+// ── LOAD CONVERSATION LIST ──
+function loadConvList() {
+  if (!CU) return;
+  onValue(ref(db, 'convs'), snap => {
+    const convList = document.getElementById('convList');
+    let convs = [];
+    snap.forEach(c => {
+      const d = c.val();
+      if (d.members && d.members[CU.uid]) convs.push({ id: c.key, ...d });
+    });
+    convs.sort((a, b) => (b.lastAt || 0) - (a.lastAt || 0));
+    if (!convs.length) { convList.innerHTML = '<div class="conv-empty">মেসেজ নেই। বিজ্ঞাপনে মেসেজ করুন।</div>'; return; }
+    convList.innerHTML = convs.map(c => {
+      const otherId = Object.keys(c.members).find(k => k !== CU.uid);
+      const otherName = c.members[otherId] || 'ব্যবহারকারী';
+      const unread = c[CU.uid + '_read'] === false;
+      const initials = otherName.slice(0, 1).toUpperCase();
+      const t = c.lastAt ? timeAgo(c.lastAt) : '';
+      return `<div class="conv-item ${activeCid===c.id?'on':''}" onclick="openConv('${c.id}','${otherId}','${esc(otherName)}','${esc(c.adTitle||'')}')">
+        <div class="avatar">${initials}</div>
+        <div class="conv-info">
+          <div class="conv-name">${esc(otherName)}</div>
+          <div class="conv-prev">${esc(c.lastMsg||'')}</div>
+          <div class="conv-time">${t} · ${esc(c.adTitle||'')}</div>
+        </div>
+        ${unread ? '<div class="unread-dot"></div>' : ''}
+      </div>`;
+    }).join('');
+    // Update msg dot
+    const hasUnread = convs.some(c => c[CU.uid + '_read'] === false);
+    document.getElementById('msgDot').style.display = hasUnread ? 'inline-block' : 'none';
+  });
+}
+
+// ── OPEN CONVERSATION ──
+window.openConv = (cid, otherId, otherName, adTitle) => {
+  activeCid = cid;
+  document.getElementById('noChatSel').style.display = 'none';
+  const cv = document.getElementById('chatView');
+  cv.style.display = 'flex';
+  cv.style.flexDirection = 'column';
+  cv.style.overflow = 'hidden';
+  cv.style.flex = '1';
+
+  // Header
+  document.getElementById('chatHdr').innerHTML = `
+    <div class="avatar">${otherName.slice(0,1).toUpperCase()}</div>
+    <div><div class="chat-name">${esc(otherName)}</div><div class="chat-ref">📋 ${esc(adTitle)}</div></div>
+  `;
+
+  // Mark as read
+  update(ref(db, 'convs/' + cid), { [CU.uid + '_read']: true });
+
+  // Listen for messages
+  if (unsubMsgs) unsubMsgs();
+  unsubMsgs = onValue(ref(db, 'msgs/' + cid), snap => {
+    const msgs = [];
+    snap.forEach(c => msgs.push({ id: c.key, ...c.val() }));
+    msgs.sort((a, b) => a.createdAt - b.createdAt);
+    const msgsEl = document.getElementById('chatMsgs');
+    if (!msgs.length) { msgsEl.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:20px;font-size:.85rem">কথোপকথন শুরু করুন 👋</div>'; return; }
+    msgsEl.innerHTML = msgs.map(m => {
+      const mine = m.senderId === CU.uid;
+      return `<div class="bubble-wrap ${mine?'mine':'theirs'}">
+        <div class="bubble">${esc(m.text)}</div>
+        <div class="btime">${timeAgo(m.createdAt)}</div>
+      </div>`;
+    }).join('');
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  });
+
+  // Refresh conv list active state
+  document.querySelectorAll('.conv-item').forEach(el => el.classList.remove('on'));
+  loadConvList();
+};
+
+// ── SEND MESSAGE IN CHAT ──
+window.sendMsg = () => {
+  if (!activeCid) return;
+  const text = document.getElementById('chatInp').value.trim();
+  if (!text) return;
+  document.getElementById('chatInp').value = '';
+  const snap = {};
+  // Get conv info to find other user
+  get(ref(db, 'convs/' + activeCid)).then(s => {
+    const d = s.val();
+    if (!d) return;
+    const otherId = Object.keys(d.members).find(k => k !== CU.uid);
+    const otherName = d.members[otherId];
+    const msgData = {
+      text, senderId: CU.uid, senderName: CU.name,
+      receiverId: otherId, receiverName: otherName,
+      adId: d.adId, adTitle: d.adTitle,
+      createdAt: Date.now(), read: false
+    };
+    push(ref(db, 'msgs/' + activeCid), msgData);
+    update(ref(db, 'convs/' + activeCid), {
+      lastMsg: text, lastAt: Date.now(),
+      [CU.uid + '_read']: true,
+      [otherId + '_read']: false
+    });
+  });
+};
+
+// ── PROFILE ──
+function renderProfile() {
+  if (!CU) return;
+  const h = document.getElementById('profileHdr');
+  h.innerHTML = `
+    <div class="profile-avatar">${CU.name.slice(0,1).toUpperCase()}</div>
+    <div class="profile-info">
+      <h2>${esc(CU.name)}</h2>
+      <p>📞 ${esc(CU.phone)}</p>
+      <p style="margin-top:6px;font-size:.82rem;color:var(--text-muted)">ব্যবহারকারী আইডি: ${esc(CU.uid)}</p>
+    </div>`;
+}
+
+function renderMyAds() {
+  const list = allAds.filter(a => a.sellerId === CU.uid && a.status !== 'deleted');
+  const g = document.getElementById('myAdsGrid');
+  g.innerHTML = list.length ? list.map(adCard).join('') : `<div class="empty"><div class="ei">📋</div><p>কোনো বিজ্ঞাপন নেই</p></div>`;
+}
+
+// ── ADMIN ──
+function renderAdmin() {
+  if (!CU || !CU.isAdmin) return;
+  const active = allAds.filter(a => a.status === 'active').length;
+  const sold = allAds.filter(a => a.status === 'sold').length;
+  document.getElementById('ad-total').textContent = allAds.length;
+  document.getElementById('ad-pending').textContent = active;
+  document.getElementById('ad-sold').textContent = sold;
+  get(ref(db, 'users')).then(s => {
+    document.getElementById('ad-users').textContent = s.size || 0;
+    const tbody = document.getElementById('adminUsersTable');
+    const rows = [];
+    s.forEach(c => {
+      const u = c.val();
+      rows.push(`<tr><td>${esc(u.name)}</td><td>${esc(u.phone)}</td><td>${u.joinedAt?new Date(u.joinedAt).toLocaleDateString('bn-BD'):'-'}</td></tr>`);
+    });
+    tbody.innerHTML = rows.join('') || '<tr><td colspan="3" style="text-align:center;color:var(--text-muted)">ব্যবহারকারী নেই</td></tr>';
+  });
+  const tb = document.getElementById('adminAdsTable');
+  tb.innerHTML = allAds.map(ad => `
+    <tr>
+      <td><strong>${esc(ad.title)}</strong></td>
+      <td>${esc(ad.sellerName)}</td>
+      <td>৳ ${ad.price?.toLocaleString('bn-BD')||0}</td>
+      <td><span class="sbadge ${ad.status}">${ad.status==='active'?'সক্রিয়':ad.status==='sold'?'বিক্রিত':'মুছে দেওয়া'}</span></td>
+      <td>${new Date(ad.createdAt).toLocaleDateString('bn-BD')}</td>
+      <td>
+        ${ad.status!=='sold'?`<button class="act-btn sold-btn" onclick="adminMark('${ad.id}','sold')">বিক্রিত</button>`:''}
+        ${ad.status==='sold'?`<button class="act-btn approve-btn" onclick="adminMark('${ad.id}','active')">সক্রিয়</button>`:''}
+        <button class="act-btn del-btn" onclick="adminDel('${ad.id}')">মুছুন</button>
+      </td>
+    </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">কোনো বিজ্ঞাপন নেই</td></tr>';
+}
+
+window.adminMark = (id, status) => {
+  update(ref(db, 'ads/' + id), { status });
+  toast(status === 'sold' ? 'বিক্রিত চিহ্নিত' : 'সক্রিয় করা হয়েছে');
+  setTimeout(renderAdmin, 600);
+};
+
+window.adminDel = id => {
+  if (!confirm('এই বিজ্ঞাপনটি মুছে দিতে চান?')) return;
+  update(ref(db, 'ads/' + id), { status: 'deleted' });
+  toast('মুছে দেওয়া হয়েছে');
+  setTimeout(renderAdmin, 600);
+};
+
+window.changeAdminPass = () => {
+  const p = document.getElementById('newPassInp').value.trim();
+  if (p.length < 6) return toast('পাসওয়ার্ড কমপক্ষে ৬ অক্ষর হতে হবে', true);
+  localStorage.setItem('cb_apass', p);
+  adminPass = p;
+  toast('পাসওয়ার্ড পরিবর্তিত হয়েছে ✅');
+  document.getElementById('newPassInp').value = '';
+};
+
+// ── HELPERS ──
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function toBn(n) {
+  const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  return String(n).replace(/\d/g, d => bnDigits[d]);
+}
+
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60) return 'এইমাত্র';
+  if (s < 3600) return toBn(Math.floor(s/60)) + ' মিনিট আগে';
+  if (s < 86400) return toBn(Math.floor(s/3600)) + ' ঘণ্টা আগে';
+  return toBn(Math.floor(s/86400)) + ' দিন আগে';
+}
+
+window.toast = toast;
+function toast(msg, err = false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (err ? ' err' : '');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
